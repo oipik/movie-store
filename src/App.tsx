@@ -5,6 +5,7 @@ import HomePage from "./pages/HomePage";
 import Movies from "./pages/Movies";
 import Series from "./pages/Series";
 import FavouritesPage from "./pages/FavouritesPage";
+import Movie from "./pages/Movie";
 import Page404 from "./pages/Page404";
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <Route path="/movies" element={<Movies />}/>
         <Route path="/series" element={<Series />}/>
         <Route path="/favourites" element={<FavouritesPage />} />
+         <Route path="/movie/:name" element={<Movie />} />
         <Route path="*" element={<Page404 />} />
       </Routes>
     </>

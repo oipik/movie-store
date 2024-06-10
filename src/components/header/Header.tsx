@@ -5,7 +5,7 @@ import search from "../../images/search.svg"
 
 const Header: React.FC = () => {
   return (
-    <section className='bg-[#F8F8F8] w-full h-[100px] flex items-center'>
+    <section className='w-full h-[100px] flex items-center'>
       <Wrapper>
         <div className='flex items-center justify-between'>
           <div className='flex items-center'>
