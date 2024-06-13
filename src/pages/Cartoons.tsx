@@ -1,20 +1,20 @@
 import React, { useEffect } from 'react'
-import { useGetSeriesQuery } from '../store/movies/movies.api'
+import { useGetCartoonsQuery } from '../store/movies/movies.api'
 import { useSearchParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
-import { changeCurrentPageSeries } from '../store/movies/movies.slice';
+import { changeCurrentPageCartoon } from '../store/movies/movies.slice';
 
 import Paginate from '../components/paginate/Paginate';
 import Card from '../components/card/Card';
 import SwitcherTheme from '../components/switcherTheme/SwitcherTheme';
 
-const Series: React.FC = () => {
+const Cartoons: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const currentPage = useAppSelector(state => state.movies.currentPageSeries);
+  const currentPage = useAppSelector(state => state.movies.currentPageCartoon);
   const dispatch = useAppDispatch();
 
-  const { docs: data = [], page = 0, pageCount = 0, isLoading, isError, isFetching } = useGetSeriesQuery(currentPage, {
+  const { docs: data = [], page = 0, pageCount = 0, isLoading, isError, isFetching } = useGetCartoonsQuery(currentPage, {
     selectFromResult: ({ data, isLoading, isError, isFetching }) => ({
       docs: data?.docs,
       limit: data?.limit,
@@ -29,11 +29,11 @@ const Series: React.FC = () => {
   }, [currentPage])
 
   const handlePageClick = ({ selected }: { selected: number }) => {
-    dispatch(changeCurrentPageSeries(selected + 1));
+    dispatch(changeCurrentPageCartoon(selected + 1));
   };
 
   const movies = data?.map((movie, i) => {
-    return <Card query={`/series/${movie.id}`} key={i} movie={movie} />
+    return <Card query={`/movies/${movie.id}`} key={i} movie={movie} />
   })
 
   return (
@@ -47,7 +47,8 @@ const Series: React.FC = () => {
         {(movies?.length !== 0 && !isFetching) ? <Paginate initialPage={page - 1} pageCount={pageCount} handlePageClick={handlePageClick} /> : null}
       </div>
     </>
+
   )
 }
 
-export default Series
+export default Cartoons

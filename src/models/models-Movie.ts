@@ -1,46 +1,51 @@
-export interface IResponseMovies {
-  docs: IMovies[]
-  total: number
-  limit: number
-  page: number
-  pages: number
-}
+// GetMovie
 
-export interface IMovies {
+export interface IResponseMovie {
   id: number
+  externalId: ExternalId
   name: string
-  alternativeName?: string
+  alternativeName: string
   enName: any
+  names: Name[]
   type: string
   typeNumber: number
   year: number
-  description?: string
-  shortDescription?: string
+  description: string
+  shortDescription: string
   slogan: any
-  status?: string
+  status: any
   rating: Rating
   votes: Votes
-  movieLength?: number
-  totalSeriesLength?: number
-  seriesLength?: number
+  movieLength: number
+  totalSeriesLength: any
+  seriesLength: any
   ratingMpaa: any
-  ageRating?: number
+  ageRating: number
+  poster: Poster
+  backdrop: Backdrop
   genres: Genre[]
   countries: Country[]
   persons: Person[]
   premiere: Premiere
+  watchability: Watchability
   top10: any
   top250: any
   isSeries: boolean
   ticketsOnSale: boolean
   lists: string[]
+  networks: any
   createdAt: string
   updatedAt: string
-  externalId?: ExternalId
-  poster?: Poster
-  backdrop?: Backdrop
-  releaseYears?: ReleaseYear[]
-  watchability?: Watchability
+}
+
+export interface ExternalId {
+  kpHD: string
+}
+
+export interface Name {
+  name: string
+  language?: string
+  type: string
 }
 
 export interface Rating {
@@ -59,6 +64,16 @@ export interface Votes {
   await: number
 }
 
+export interface Poster {
+  url: string
+  previewUrl: string
+}
+
+export interface Backdrop {
+  url: string
+  previewUrl: string
+}
+
 export interface Genre {
   name: string
 }
@@ -71,8 +86,8 @@ export interface Person {
   id: number
   photo: string
   name?: string
-  enName?: string
-  description?: string
+  enName: string
+  description: any
   profession: string
   enProfession: string
 }
@@ -84,26 +99,6 @@ export interface Premiere {
   cinema: any
   bluray: any
   dvd: any
-  world: any
-}
-
-export interface ExternalId {
-  kpHD: string
-}
-
-export interface Poster {
-  url: string
-  previewUrl: string
-}
-
-export interface Backdrop {
-  url: string
-  previewUrl: string
-}
-
-export interface ReleaseYear {
-  start: number
-  end?: number
 }
 
 export interface Watchability {
@@ -119,3 +114,4 @@ export interface Item {
 export interface Logo {
   url: string
 }
+

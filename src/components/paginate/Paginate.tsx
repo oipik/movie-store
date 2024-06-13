@@ -16,10 +16,13 @@ const Paginate: React.FC<IPaginateProps> = ({initialPage, pageCount, handlePageC
       initialPage={initialPage}
       pageCount={pageCount}
       onPageChange={handlePageClick}
-      containerClassName="flex flex-wrap items-center justify-center mt-6 space-x-4 text-xl "
-      pageClassName="mb-4 mb-0 border border-solid border-lightGray rounded-3xl hover:bg-[#33A8F6] hover:text-white"
+      containerClassName="flex flex-wrap items-center justify-center mt-10 mb-[50px] space-x-4 text-xl "
+      pageClassName="mb-0 border border-solid border-lightGray rounded-3xl hover:bg-default hover:text-white dark:bg-white"
       pageLinkClassName="cursor-pointer block w-12 h-12 flex items-center justify-center "
-      activeClassName="bg-[#33A8F6] text-white"
+      activeClassName="bg-default text-white dark:text-black dark:bg-sky-500"
+      previousClassName="dark:text-white hover:text-default"
+      nextClassName="dark:text-white hover:text-default"
+      breakClassName="dark:text-white hover:text-default"
     />
   )
 }

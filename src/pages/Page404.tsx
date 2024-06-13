@@ -1,8 +1,12 @@
 import React from 'react'
 
-const Page404 = () => {
+const Page404: React.FC = () => {
   return (
-    <div>Page404</div>
+    <>
+      <div className='flex flex-wrap justify-center gap-[40px]'>
+        <p className='text-4xl'>Not found page...</p>
+      </div>
+    </>
   )
 }
 

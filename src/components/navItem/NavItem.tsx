@@ -7,9 +7,9 @@ interface PropsType {
 
 const NavItem: React.FC<PropsType> = ({ text, link }) => {
   return (
-    <li className={`cursor-pointer text-[#BEBEBE] text-2xl font-bold hover:text-[#33A8F6] hover:border-[#33A8F6] transition-all duration-100`}>
+    <li className={`cursor-pointer text-[#BEBEBE] text-2xl font-bold hover:text-default hover:border-default transition-all duration-100`}>
       <NavLink to={link}
-        className={({ isActive }) => isActive ? "border-b-4 text-[#33A8F6] border-[#33A8F6]" : ""}>
+        className={({ isActive }) => isActive ? "border-b-4 text-default border-default" : ""}>
         {text}
       </NavLink>
     </li>
