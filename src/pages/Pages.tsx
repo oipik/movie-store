@@ -11,19 +11,17 @@ import Layout from "./Layout";
 
 function Pages(): JSX.Element {
   return (
-    <>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<HomePage />}/>
-          <Route path="movies" element={<Movies />} />
-          <Route path="series" element={<Series />} />
-          <Route path="cartoons" element={<Cartoons />} />
-          <Route path="favourites" element={<Favourites />} />
-          <Route path=":movie/:id" element={<Movie />} />
-          <Route path="*" element={<Page404 />} />
-        </Route>
-      </Routes>
-    </>
+    <Routes >
+      <Route path="/" element={<Layout />}>
+        <Route index element={<HomePage />} />
+        <Route path="movies" element={<Movies />} />
+        <Route path="series" element={<Series />} />
+        <Route path="cartoons" element={<Cartoons />} />
+        <Route path="favourites" element={<Favourites />} />
+        <Route path=":movie/:id" element={<Movie />} />
+        <Route path="*" element={<Page404 />} />
+      </Route>
+    </Routes>
   );
 }
 

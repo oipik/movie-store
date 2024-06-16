@@ -1,20 +1,18 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useGetSeriesQuery } from '../store/movies/movies.api'
-import { useSearchParams } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../hooks/hooks';
-import { changeCurrentPageSeries } from '../store/movies/movies.slice';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 
 import Paginate from '../components/paginate/Paginate';
 import Card from '../components/card/Card';
 import SwitcherTheme from '../components/switcherTheme/SwitcherTheme';
 
 const Series: React.FC = () => {
+  const [newPage, setNewPage] = useState(1);
   const [searchParams, setSearchParams] = useSearchParams();
+  const page = Number(searchParams.get('page') || '1');
+  const navigate = useNavigate();
 
-  const currentPage = useAppSelector(state => state.movies.currentPageSeries);
-  const dispatch = useAppDispatch();
-
-  const { docs: data = [], page = 0, pageCount = 0, isLoading, isError, isFetching } = useGetSeriesQuery(currentPage, {
+  const { docs: data = [], pageCount = 0, isLoading, isError, isFetching, refetch } = useGetSeriesQuery(page, {
     selectFromResult: ({ data, isLoading, isError, isFetching }) => ({
       docs: data?.docs,
       limit: data?.limit,
@@ -25,11 +23,11 @@ const Series: React.FC = () => {
   });
 
   useEffect(() => {
-    setSearchParams(`page=${currentPage}`);
-  }, [currentPage])
+    navigate(`?page=${newPage}`);
+  }, [newPage])
 
   const handlePageClick = ({ selected }: { selected: number }) => {
-    dispatch(changeCurrentPageSeries(selected + 1));
+    setNewPage(selected + 1);
   };
 
   const movies = data?.map((movie, i) => {

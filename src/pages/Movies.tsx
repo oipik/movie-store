@@ -1,36 +1,33 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { useGetMoviesQuery } from '../store/movies/movies.api'
-import { useSearchParams } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../hooks/hooks';
-import { changeCurrentPageMovie } from '../store/movies/movies.slice';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 
 import Paginate from '../components/paginate/Paginate';
 import Card from '../components/card/Card';
 import SwitcherTheme from '../components/switcherTheme/SwitcherTheme';
 
 const Movies: React.FC = () => {
+  const [newPage, setNewPage] = useState(1);
   const [searchParams, setSearchParams] = useSearchParams();
+  const page = Number(searchParams.get('page') || '1');
+  const navigate = useNavigate();
 
-  const { currentPageMovie: currentPage } = useAppSelector(state => state.movies);
-  const dispatch = useAppDispatch();
-
-  const { docs: data = [], page = 0, pageCount = 0, isLoading, isError, isFetching } = useGetMoviesQuery(currentPage, {
+  const { docs: data = [], pageCount = 0, isLoading, isError, isFetching } = useGetMoviesQuery(page, {
     selectFromResult: ({ data, isLoading, isError, isFetching }) => ({
       docs: data?.docs,
       limit: data?.limit,
-      page: data?.page,
       pageCount: data?.pages,
       isLoading, isError, isFetching
     })
   });
 
   useEffect(() => {
-    setSearchParams(`page=${currentPage}`);
-  }, [currentPage])
+    navigate(`?page=${newPage}`);
+  }, [newPage])
 
   const handlePageClick = ({ selected }: { selected: number }) => {
-    dispatch(changeCurrentPageMovie(selected + 1));
+    setNewPage(selected + 1);
   };
 
   const movies = data?.map((movie, i) => {
@@ -52,3 +49,4 @@ const Movies: React.FC = () => {
 }
 
 export default Movies;
+
