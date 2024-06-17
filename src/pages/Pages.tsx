@@ -8,6 +8,7 @@ import Favourites from './Favourites'
 import Movie from "./Movie";
 import Page404 from "./Page404";
 import Layout from "./Layout";
+import SearchResult from "./SearchResult";
 
 function Pages(): JSX.Element {
   return (
@@ -18,6 +19,7 @@ function Pages(): JSX.Element {
         <Route path="series" element={<Series />} />
         <Route path="cartoons" element={<Cartoons />} />
         <Route path="favourites" element={<Favourites />} />
+        <Route path="search" element={<SearchResult />} />
         <Route path=":movie/:id" element={<Movie />} />
         <Route path="*" element={<Page404 />} />
       </Route>

@@ -1,18 +1,22 @@
-import React, { useEffect, useState } from 'react'
-import { useGetCartoonsQuery } from '../store/movies/movies.api'
+import React from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
+import { useGetMovieByQuery } from '../store/movies/movies.api';
 
-import Paginate from '../components/paginate/Paginate';
 import Card from '../components/card/Card';
 import SwitcherTheme from '../components/switcherTheme/SwitcherTheme';
+import Paginate from '../components/paginate/Paginate';
+import { useAppDispatch, useAppSelector } from '../hooks/hooks';
+import { changeNewPage } from '../store/movies/movies.slice';
 
-const Cartoons: React.FC = () => {
-  const [newPage, setNewPage] = useState(1);
-  const [searchParams, setSearchParams] = useSearchParams();
-  const page = Number(searchParams.get('page') || '1');
+const SearchResult = () => {
+  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+  const query = searchParams.get('query') || '';
 
-  const { docs: data = [], pageCount = 0, isLoading, isError, isFetching, refetch } = useGetCartoonsQuery(page, {
+  const { newPage } = useAppSelector(state => state.movies);
+  const dispatch = useAppDispatch();
+
+  const { docs: data = [], page, pageCount = 0, isLoading, isError, isFetching } = useGetMovieByQuery({query, newPage}, {
     selectFromResult: ({ data, isLoading, isError, isFetching }) => ({
       docs: data?.docs,
       limit: data?.limit,
@@ -22,12 +26,8 @@ const Cartoons: React.FC = () => {
     })
   });
 
-  useEffect(() => {
-    navigate(`?page=${newPage}`);
-  }, [newPage])
-
   const handlePageClick = ({ selected }: { selected: number }) => {
-    setNewPage(selected + 1);
+    dispatch(changeNewPage(selected + 1));
   };
 
   const movies = data?.map((movie, i) => {
@@ -42,10 +42,10 @@ const Cartoons: React.FC = () => {
       </div>
       <div className='relative'>
         {!(isLoading || isFetching) && <SwitcherTheme />}
-        {(movies?.length !== 0 && !isFetching) ? <Paginate initialPage={page - 1} pageCount={pageCount} handlePageClick={handlePageClick} /> : null}
+        {(movies?.length !== 0 && !isFetching) ? <Paginate initialPage={page! - 1} pageCount={pageCount} handlePageClick={handlePageClick} /> : null}
       </div>
     </>
   )
-}
+};
 
-export default Cartoons
+export default SearchResult

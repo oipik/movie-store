@@ -3,9 +3,7 @@ import Pages from "./pages/Pages";
 
 const App: React.FC = () => {
   return (
-    <>
-      <Pages />
-    </>
+    <Pages />
   );
 }
 

@@ -16,13 +16,6 @@ export const moviesApi = createApi({
         method: 'GET',
         headers: { accept: 'application/json', 'X-API-KEY': API_KEY }
       }),
-      transformResponse: (response: IResponseMovies): IResponseMovies => ({
-        docs: response.docs,
-        limit: response.limit,
-        page: response.page,
-        pages: response.pages,
-        total: response.total
-      }),
     }),
     getSeries: builder.query<IResponseMovies, number>({
       query: (initialPage: number) => ({
@@ -30,26 +23,12 @@ export const moviesApi = createApi({
         method: 'GET',
         headers: { accept: 'application/json', 'X-API-KEY': API_KEY }
       }),
-      transformResponse: (response: IResponseMovies): IResponseMovies => ({
-        docs: response.docs,
-        limit: response.limit,
-        page: response.page,
-        pages: response.pages,
-        total: response.total
-      }),
     }),
     getCartoons: builder.query<IResponseMovies, number>({
       query: (initialPage: number) => ({
         url: `movie?page=${initialPage}&limit=10&selectFields=&notNullFields=name&notNullFields=year&notNullFields=rating.kp&notNullFields=poster.url&year=2015-2024&rating.kp=7-10&type=cartoon`,
         method: 'GET',
         headers: { accept: 'application/json', 'X-API-KEY': API_KEY }
-      }),
-      transformResponse: (response: IResponseMovies): IResponseMovies => ({
-        docs: response.docs,
-        limit: response.limit,
-        page: response.page,
-        pages: response.pages,
-        total: response.total
       }),
     }),
     getMovie: builder.query<IResponseMovie, string>({
@@ -59,7 +38,14 @@ export const moviesApi = createApi({
         headers: { accept: 'application/json', 'X-API-KEY': API_KEY }
       }),
     }),
+    getMovieBy: builder.query<IResponseMovies, {query: string, newPage: number}>({
+      query: ({query, newPage}) => ({
+        url: `movie/search?page=${newPage}&limit=10&query=${query}`,
+        method: 'GET',
+        headers: { accept: 'application/json', 'X-API-KEY': API_KEY }
+      }),
+    }),
   }),
 })
 
-export const { useGetMoviesQuery, useGetSeriesQuery, useGetMovieQuery, useGetCartoonsQuery } = moviesApi;
+export const { useGetMoviesQuery, useGetSeriesQuery, useGetMovieQuery, useGetCartoonsQuery, useGetMovieByQuery } = moviesApi;
