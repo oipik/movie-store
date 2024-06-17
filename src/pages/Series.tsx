@@ -4,7 +4,6 @@ import { useSearchParams, useNavigate } from 'react-router-dom';
 
 import Paginate from '../components/paginate/Paginate';
 import Card from '../components/card/Card';
-import SwitcherTheme from '../components/switcherTheme/SwitcherTheme';
 
 const Series: React.FC = () => {
   const [newPage, setNewPage] = useState(1);
@@ -40,8 +39,7 @@ const Series: React.FC = () => {
         {isError && <p className='text-4xl dark:text-white'>Ошибка доступа...</p>}
         {isLoading || isFetching ? <p className='text-4xl dark:text-white'>Loading...</p> : movies}
       </div>
-      <div className='relative'>
-        {!(isLoading || isFetching) && <SwitcherTheme />}
+      <div>
         {(movies?.length !== 0 && !isFetching) ? <Paginate initialPage={page - 1} pageCount={pageCount} handlePageClick={handlePageClick} /> : null}
       </div>
     </>

@@ -2,7 +2,6 @@ import React from 'react'
 import { useAppSelector } from '../hooks/hooks';
 
 import Card from '../components/card/Card';
-import SwitcherTheme from '../components/switcherTheme/SwitcherTheme';
 
 const Favourites: React.FC = () => {
   const { favourites } = useAppSelector(state => state.movies);
@@ -12,12 +11,9 @@ const Favourites: React.FC = () => {
   })
 
   return (
-    <>
-      <div className='flex flex-wrap justify-center gap-[40px]'>
-        {movies?.length !== 0 ? movies : <p className='text-4xl dark:text-white'>Вы пока еще ничего не добавляли...</p>}
-      </div>
-      {movies?.length > 0 && <div className='relative'> <SwitcherTheme /></div>}
-    </>
+    <div className='flex flex-wrap justify-center gap-[40px]'>
+      {movies?.length !== 0 ? movies : <p className='text-4xl dark:text-white'>Вы пока еще ничего не добавляли...</p>}
+    </div>
   )
 }
 

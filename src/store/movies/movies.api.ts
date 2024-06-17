@@ -38,14 +38,29 @@ export const moviesApi = createApi({
         headers: { accept: 'application/json', 'X-API-KEY': API_KEY }
       }),
     }),
-    getMovieBy: builder.query<IResponseMovies, {query: string, newPage: number}>({
+    getMoviesBy: builder.query<IResponseMovies, {query: string, newPage: number}>({
       query: ({query, newPage}) => ({
         url: `movie/search?page=${newPage}&limit=10&query=${query}`,
         method: 'GET',
         headers: { accept: 'application/json', 'X-API-KEY': API_KEY }
       }),
     }),
+    getMovieRandom: builder.query<IResponseMovie, void>({
+      query: () => ({
+        url: `movie/random?notNullFields=name&notNullFields=poster.url&notNullFields=description&notNullFields=rating.kp&notNullFields=alternativeName&notNullFields=watchability.items.url&rating.kp=8-10&rating.imdb=8-10`,
+        method: 'GET',
+        headers: { accept: 'application/json', 'X-API-KEY': API_KEY }
+      }),
+      keepUnusedDataFor: 0,
+    }),
   }),
 })
 
-export const { useGetMoviesQuery, useGetSeriesQuery, useGetMovieQuery, useGetCartoonsQuery, useGetMovieByQuery } = moviesApi;
+export const { 
+  useGetMoviesQuery, 
+  useGetSeriesQuery, 
+  useGetMovieQuery, 
+  useGetCartoonsQuery, 
+  useGetMoviesByQuery,
+  useGetMovieRandomQuery 
+} = moviesApi;

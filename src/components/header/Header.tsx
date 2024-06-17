@@ -2,9 +2,10 @@ import React, { useState } from 'react'
 import NavItem from '../navItem/NavItem'
 import Wrapper from '../wrapper/Wrapper'
 import searchSvg from "../../images/search.svg"
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useAppDispatch } from '../../hooks/hooks'
 import { changeNewPage } from '../../store/movies/movies.slice'
+import SwitcherTheme from '../switcherTheme/SwitcherTheme'
 
 const Header: React.FC = () => {
   const [search, setSearch] = useState('');
@@ -25,7 +26,7 @@ const Header: React.FC = () => {
     <Wrapper>
       <div className='flex items-center justify-between'>
         <div className='flex items-center'>
-          <div className='text-[#535353] font-bold text-3xl dark:text-[#FBFDFC]'>Movie-store</div>
+          <Link to="/" className='text-[#535353] hover:text-default font-bold text-3xl dark:text-[#FBFDFC]'>Movie-store</Link>
           <nav className='ml-8'>
             <ul className="flex space-x-7 items-center">
               <NavItem text="Фильмы" link="/movies" />
@@ -35,7 +36,8 @@ const Header: React.FC = () => {
             </ul>
           </nav>
         </div>
-        <div className='flex'>
+        <div className='flex items-center'>
+          <SwitcherTheme />
           <input
             value={search}
             onChange={e => setSearch(e.target.value)}

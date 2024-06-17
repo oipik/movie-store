@@ -1,11 +1,39 @@
 import React from 'react';
+import { useGetMovieRandomQuery } from '../store/movies/movies.api';
+import star from '../images/star.png'
 
 const HomePage: React.FC = () => {
+
+  const { data: poster, isLoading, isError } = useGetMovieRandomQuery();
+
+  console.log(poster);
+
+  const watch = poster?.watchability?.items.filter(item => item.name);
+
   return (
     <>
-      <div className='bg-[#F6F6F6] h-full dark:bg-[#0B0C0E]'>
-        HomePage
-      </div>
+      {isError && <p className='text-center text-4xl dark:text-white'>Ошибка доступа...</p>}
+      {isLoading && <p className='text-center text-4xl dark:text-white'>Loading...</p>}
+      {poster && poster !== undefined &&
+        <section className='flex justify-between px-5'>
+          <div className='mr-[20px]'>
+            <h2 className='text-2xl font-bold dark:text-white mb-[20px]'>{poster.name}, {poster.alternativeName}</h2>
+            <div className='flex items-center text-2xl font-semibold dark:text-white mb-[20px]'>
+              <img className='w-[35px] h-[35px] mr-[10px]' src={star} alt="star" />
+              <span>{poster.rating.kp.toFixed(1)}</span>
+            </div>
+            <p className='mb-[15px] dark:text-white'>{poster.description}</p>
+            <div className=''>
+              {watch?.map((item, i) => (
+                <a href={item.url} key={i} target='_blank' className='inline-block p-[10px] mb-5 mr-[10px] cursor-pointer text-white bg-default font-bold text-xl rounded'>
+                  {item.name}
+                </a>
+              ))}
+            </div>
+          </div>
+          <img className='w-[300px] h-[400px] mr-[50px]' src={poster.poster.url} alt="poster" />
+        </section>
+      }
     </>
   )
 }

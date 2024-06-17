@@ -2,8 +2,6 @@ import React from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useGetMovieQuery } from '../store/movies/movies.api';
 
-import SwitcherTheme from '../components/switcherTheme/SwitcherTheme';
-
 const Movie: React.FC = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -26,7 +24,7 @@ const Movie: React.FC = () => {
       {isLoading ? <p className='text-center text-4xl dark:text-white'>Loading...</p>
         :
         movie && movie !== undefined && (
-          <section className='mx-[40px]'>
+          <section className='mx-[40px] mb-[20px]'>
             <div>
               <button
                 onClick={() => navigate(-1)}
@@ -45,7 +43,7 @@ const Movie: React.FC = () => {
                     {imdb !== null && <div>IMDB {imdb}</div>}
                   </div>
                   {watch?.map((item, i) => (
-                    <a href={item.url} key={i} target='_blank' className='p-[10px] mr-[10px] cursor-pointer text-white bg-default font-bold text-xl rounded'>
+                    <a href={item.url} key={i} target='_blank' className='inline-block p-[10px] mb-5 mr-[10px] cursor-pointer text-white bg-default font-bold text-xl rounded'>
                       {item.name}
                     </a>
                   ))}
@@ -54,7 +52,6 @@ const Movie: React.FC = () => {
             </div>
           </section>
         )}
-      {movie && movie !== undefined && <div className='relative'><SwitcherTheme /></div>}
     </>
   )
 }
