@@ -5,7 +5,7 @@ interface PropsType {
 
 const Wrapper: React.FC<PropsType> = ({ children }) => {
   return (
-    <section className="container mx-auto py-6 px-4 ">
+    <section className="l:container w-full mx-auto py-6 px-4 ">
       {children}
     </section>
   )

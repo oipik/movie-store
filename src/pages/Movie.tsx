@@ -29,11 +29,11 @@ const Movie: React.FC = () => {
               <button
                 onClick={() => navigate(-1)}
                 className='mb-[50px] inline-block px-[20px] h-[50px] cursor-pointer text-white bg-default font-bold text-xl rounded'>НАЗАД</button>
-              <div className='flex '>
-                <img className='w-[300px] h-[400px] mr-[50px]' src={img} alt={name} />
+              <div className='flex flex-wrap m:flex-nowrap'>
+                <img className='w-[300px] h-[400px] m:mr-[50px] mb-[15px] mx-auto' src={img} alt={name} />
                 <div>
                   <h1 className='text-3xl font-bold text-neutral-700 mb-[10px] dark:text-white'>{name}</h1>
-                  <p className='text-xl mb-[10px] dark:text-white'>{description}</p>
+                  <p className='text-xl mb-[15px] dark:text-white'>{description}</p>
                   <p className='text-lg dark:text-white'><span className='font-bold'>Год выхода: </span>{year}</p>
                   <p className='text-lg dark:text-white'><span className='font-bold'>Страна: </span>{country}</p>
                   <p className='text-lg dark:text-white'><span className='font-bold'>Продолжительность: </span>{runtime}мин</p>

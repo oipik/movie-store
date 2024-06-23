@@ -15,8 +15,9 @@ const HomePage: React.FC = () => {
       {isError && <p className='text-center text-4xl dark:text-white'>Ошибка доступа...</p>}
       {isLoading && <p className='text-center text-4xl dark:text-white'>Loading...</p>}
       {poster && poster !== undefined &&
-        <section className='flex justify-between px-5'>
-          <div className='mr-[20px]'>
+        <section className='m:flex m:justify-between px-5 mt-[70px]'>
+          <img className='w-[300px] h-[400px] m-auto mb-[10px]' src={poster.poster.url} alt="poster" />
+          <div className='ml-[40px]'>
             <h2 className='text-2xl font-bold dark:text-white mb-[20px]'>{poster.name}, {poster.alternativeName}</h2>
             <div className='flex items-center text-2xl font-semibold dark:text-white mb-[20px]'>
               <img className='w-[35px] h-[35px] mr-[10px]' src={star} alt="star" />
@@ -31,7 +32,6 @@ const HomePage: React.FC = () => {
               ))}
             </div>
           </div>
-          <img className='w-[300px] h-[400px] mr-[50px]' src={poster.poster.url} alt="poster" />
         </section>
       }
     </>

@@ -15,7 +15,7 @@ const Layout: React.FC = () => {
           <Outlet />
         </Wrapper>
       </main>
-      <footer className='pt-[40px] pb-[60px] dark:bg-[#0B0C0E] h-[180px] bg-white'>
+      <footer className='pt-[20px] pb-[60px] dark:bg-[#0B0C0E] h-[180px] bg-white'>
         <Footer />
       </footer>
     </div>
