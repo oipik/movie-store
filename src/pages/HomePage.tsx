@@ -6,8 +6,6 @@ const HomePage: React.FC = () => {
 
   const { data: poster, isLoading, isError } = useGetMovieRandomQuery();
 
-  console.log(poster);
-
   const watch = poster?.watchability?.items.filter(item => item.name);
 
   return (
@@ -26,7 +24,7 @@ const HomePage: React.FC = () => {
             <p className='mb-[15px] dark:text-white'>{poster.description}</p>
             <div className=''>
               {watch?.map((item, i) => (
-                <a href={item.url} key={i} target='_blank' className='inline-block p-[10px] mb-5 mr-[10px] cursor-pointer text-white bg-default font-bold text-xl rounded'>
+                <a href={item.url} key={i} rel="noreferrer" target='_blank' className='inline-block p-[10px] mb-5 mr-[10px] cursor-pointer text-white bg-default font-bold text-xl rounded'>
                   {item.name}
                 </a>
               ))}
