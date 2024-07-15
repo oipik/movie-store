@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from 'react'
-import { useGetMoviesQuery } from '../store/movies/movies.api'
+import { useGetCartoonsQuery } from '../../store/movies/movies.api'
 import { useSearchParams, useNavigate } from 'react-router-dom';
 
-import Paginate from '../components/paginate/Paginate';
-import Card from '../components/card/Card';
+import Paginate from '../../components/paginate/Paginate';
+import Card from '../../components/card/Card';
 
-const Movies: React.FC = () => {
+const Cartoons: React.FC = () => {
   const [newPage, setNewPage] = useState(1);
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const page = Number(searchParams.get('page') || '1');
   const navigate = useNavigate();
 
-  const { docs: data = [], pageCount = 0, isLoading, isError, isFetching } = useGetMoviesQuery(page, {
+  const { docs: data = [], pageCount = 0, isLoading, isError, isFetching } = useGetCartoonsQuery(page, {
     selectFromResult: ({ data, isLoading, isError, isFetching }) => ({
       docs: data?.docs,
       limit: data?.limit,
+      page: data?.page,
       pageCount: data?.pages,
       isLoading, isError, isFetching
     })
@@ -22,7 +23,7 @@ const Movies: React.FC = () => {
 
   useEffect(() => {
     navigate(`?page=${newPage}`);
-  }, [newPage])
+  }, [newPage, navigate])
 
   const handlePageClick = ({ selected }: { selected: number }) => {
     setNewPage(selected + 1);
@@ -45,5 +46,4 @@ const Movies: React.FC = () => {
   )
 }
 
-export default Movies;
-
+export default Cartoons

@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/hooks'
 import { changeTheme } from '../../store/movies/movies.slice';
 
 const SwitcherTheme: React.FC = () => {
-  const {theme} = useAppSelector(state => state.movies);
+  const { theme } = useAppSelector(state => state.movies);
   const dispatch = useAppDispatch();
 
   const handlerChangeTheme = () => {
@@ -21,7 +21,7 @@ const SwitcherTheme: React.FC = () => {
       <label className="relative inline-block w-20 h-10 rounded-full">
         <input
           checked={theme}
-          onChange={() => handlerChangeTheme()}
+          onChange={handlerChangeTheme}
           type="checkbox"
           className="peer opacity-0 w-0 h-0" />
         <span

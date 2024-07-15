@@ -1,21 +1,20 @@
 import React from 'react';
-import { useSearchParams, useNavigate } from 'react-router-dom';
-import { useGetMoviesByQuery } from '../store/movies/movies.api';
+import { useSearchParams } from 'react-router-dom';
+import { useGetMoviesByQuery } from '../../store/movies/movies.api';
 
-import Card from '../components/card/Card';
-import Paginate from '../components/paginate/Paginate';
-import { useAppDispatch, useAppSelector } from '../hooks/hooks';
-import { changeNewPage } from '../store/movies/movies.slice';
+import Card from '../../components/card/Card';
+import Paginate from '../../components/paginate/Paginate';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { changeNewPage } from '../../store/movies/movies.slice';
 
 const SearchResult: React.FC = () => {
   const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
   const query = searchParams.get('query') || '';
 
   const { newPage } = useAppSelector(state => state.movies);
   const dispatch = useAppDispatch();
 
-  const { docs: data = [], page, pageCount = 0, isLoading, isError, isFetching } = useGetMoviesByQuery({query, newPage}, {
+  const { docs: data = [], page, pageCount = 0, isLoading, isError, isFetching } = useGetMoviesByQuery({ query, newPage }, {
     selectFromResult: ({ data, isLoading, isError, isFetching }) => ({
       docs: data?.docs,
       limit: data?.limit,

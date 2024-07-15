@@ -1,7 +1,7 @@
 import React from 'react'
-import { useAppSelector } from '../hooks/hooks';
+import { useAppSelector } from '../../hooks/hooks';
 
-import Card from '../components/card/Card';
+import Card from '../../components/card/Card';
 
 const Favourites: React.FC = () => {
   const { favourites } = useAppSelector(state => state.movies);

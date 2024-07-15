@@ -1,6 +1,6 @@
 import React from 'react';
-import { useGetMovieRandomQuery } from '../store/movies/movies.api';
-import star from '../images/star.png'
+import { useGetMovieRandomQuery } from '../../store/movies/movies.api';
+import star from '../../images/star.png'
 
 const HomePage: React.FC = () => {
 

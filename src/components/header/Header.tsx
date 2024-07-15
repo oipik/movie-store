@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import NavItem from '../navItem/NavItem'
 import Wrapper from '../wrapper/Wrapper'
 import MobileMenu from '../mobileMenu/MobileMenu'
@@ -20,7 +20,6 @@ const Header: React.FC = () => {
   const navigate = useNavigate();
 
   const { theme } = useAppSelector(state => state.movies);
-
   const dispatch = useAppDispatch();
 
   const handleSearch = () => {
@@ -32,11 +31,15 @@ const Header: React.FC = () => {
     }
   }
 
+  const logo = useMemo(() => {
+    return <Link to="/" className='text-[#535353] hover:text-default font-bold text-3xl dark:text-[#FBFDFC]'>Movie-store</Link>
+  }, [])
+
   return (
     <Wrapper>
       <div className='flex items-center justify-between'>
         <div className='w-full flex items-center justify-between ll:justify-start'>
-          <Link to="/" className='text-[#535353] hover:text-default font-bold text-3xl dark:text-[#FBFDFC]'>Movie-store</Link>
+          {logo}
           <nav className='ml-8 hidden ll:block'>
             <ul className="flex space-x-7 items-center">
               <NavItem text="Фильмы" link="/movies" />

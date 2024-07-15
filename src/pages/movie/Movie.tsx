@@ -1,6 +1,6 @@
 import React from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { useGetMovieQuery } from '../store/movies/movies.api';
+import { useGetMovieQuery } from '../../store/movies/movies.api';
 
 const Movie: React.FC = () => {
   const { id } = useParams();
@@ -43,7 +43,7 @@ const Movie: React.FC = () => {
                     {imdb !== null && <div>IMDB {imdb}</div>}
                   </div>
                   {watch?.map((item, i) => (
-                    <a href={item.url} key={i} target='_blank' className='inline-block p-[10px] mb-5 mr-[10px] cursor-pointer text-white bg-default font-bold text-xl rounded'>
+                    <a href={item.url} key={i} target='_blank' rel="noreferrer" className='inline-block p-[10px] mb-5 mr-[10px] cursor-pointer text-white bg-default font-bold text-xl rounded'>
                       {item.name}
                     </a>
                   ))}

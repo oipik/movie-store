@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { NavLink } from "react-router-dom";
 
 interface PropsType {
@@ -5,7 +6,7 @@ interface PropsType {
   link: string;
 }
 
-const NavItem: React.FC<PropsType> = ({ text, link }) => {
+const NavItem: React.FC<PropsType> = memo(({ text, link }) => {
   return (
     <li className={`cursor-pointer text-[#BEBEBE] text-2xl font-bold hover:text-default hover:border-default transition-all duration-100`}>
       <NavLink to={link}
@@ -14,6 +15,6 @@ const NavItem: React.FC<PropsType> = ({ text, link }) => {
       </NavLink>
     </li>
   )
-}
+})
 
 export default NavItem

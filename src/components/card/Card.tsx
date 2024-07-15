@@ -62,7 +62,7 @@ const Card: React.FC<PropsCard> = ({ movie, query, isFavourite = false }) => {
           <img src={isFav ? heartFavourite : theme ? heart : heartWhite} alt="favourite" />
         </button>
       </div>
-    </div>
+    </div >
   )
 }
 

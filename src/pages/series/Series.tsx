@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react'
-import { useGetSeriesQuery } from '../store/movies/movies.api'
+import { useGetSeriesQuery } from '../../store/movies/movies.api'
 import { useSearchParams, useNavigate } from 'react-router-dom';
 
-import Paginate from '../components/paginate/Paginate';
-import Card from '../components/card/Card';
+import Paginate from '../../components/paginate/Paginate';
+import Card from '../../components/card/Card';
 
 const Series: React.FC = () => {
   const [newPage, setNewPage] = useState(1);
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const page = Number(searchParams.get('page') || '1');
   const navigate = useNavigate();
 
-  const { docs: data = [], pageCount = 0, isLoading, isError, isFetching, refetch } = useGetSeriesQuery(page, {
+  const { docs: data = [], pageCount = 0, isLoading, isError, isFetching } = useGetSeriesQuery(page, {
     selectFromResult: ({ data, isLoading, isError, isFetching }) => ({
       docs: data?.docs,
       limit: data?.limit,
@@ -23,7 +23,7 @@ const Series: React.FC = () => {
 
   useEffect(() => {
     navigate(`?page=${newPage}`);
-  }, [newPage])
+  }, [newPage, navigate])
 
   const handlePageClick = ({ selected }: { selected: number }) => {
     setNewPage(selected + 1);

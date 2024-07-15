@@ -1,13 +1,13 @@
-import React from 'react'
+import React, { memo } from 'react'
 import StarRatings from "react-star-ratings"
 
 interface IStarRatingsProps {
   rating: number;
 }
 
-const Rating: React.FC<IStarRatingsProps> = ({rating}) => {
+const Rating: React.FC<IStarRatingsProps> = memo(({ rating }) => {
   return (
-    <StarRatings 
+    <StarRatings
       rating={rating}
       starRatedColor="#33A8F6"
       numberOfStars={10}
@@ -15,6 +15,6 @@ const Rating: React.FC<IStarRatingsProps> = ({rating}) => {
       starDimension={'20px'}
     />
   )
-}
+})
 
 export default Rating;
