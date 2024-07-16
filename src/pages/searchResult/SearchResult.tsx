@@ -4,7 +4,7 @@ import { useGetMoviesByQuery } from '../../store/movies/movies.api';
 
 import Card from '../../components/card/Card';
 import Paginate from '../../components/paginate/Paginate';
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../../services/useTypedSelector';
 import { changeNewPage } from '../../store/movies/movies.slice';
 
 const SearchResult: React.FC = () => {

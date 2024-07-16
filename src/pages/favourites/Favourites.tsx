@@ -1,5 +1,5 @@
 import React from 'react'
-import { useAppSelector } from '../../hooks/hooks';
+import { useAppSelector } from '../../services/useTypedSelector';
 
 import Card from '../../components/card/Card';
 

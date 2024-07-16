@@ -3,7 +3,7 @@ import NavItem from '../navItem/NavItem'
 import SwitcherTheme from '../switcherTheme/SwitcherTheme';
 import searchSvg from '../../images/search.svg'
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch } from '../../hooks/hooks';
+import { useAppDispatch } from '../../services/useTypedSelector';
 import { changeNewPage } from '../../store/movies/movies.slice';
 
 interface IMobileMenu {

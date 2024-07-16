@@ -6,7 +6,6 @@ import Paginate from '../../components/paginate/Paginate';
 import Card from '../../components/card/Card';
 
 const Series: React.FC = () => {
-  const [newPage, setNewPage] = useState(1);
   const [searchParams] = useSearchParams();
   const page = Number(searchParams.get('page') || '1');
   const navigate = useNavigate();
@@ -22,11 +21,11 @@ const Series: React.FC = () => {
   });
 
   useEffect(() => {
-    navigate(`?page=${newPage}`);
-  }, [newPage, navigate])
+    navigate(`?page=${page}`);
+  }, [page, navigate])
 
   const handlePageClick = ({ selected }: { selected: number }) => {
-    setNewPage(selected + 1);
+    navigate(`?page=${selected + 1}`);
   };
 
   const movies = data?.map((movie, i) => {

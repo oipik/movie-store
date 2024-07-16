@@ -4,7 +4,7 @@ import Wrapper from '../wrapper/Wrapper'
 import MobileMenu from '../mobileMenu/MobileMenu'
 
 import { Link, useNavigate } from 'react-router-dom'
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks'
+import { useAppDispatch, useAppSelector } from '../../services/useTypedSelector'
 import { changeNewPage } from '../../store/movies/movies.slice'
 import SwitcherTheme from '../switcherTheme/SwitcherTheme'
 

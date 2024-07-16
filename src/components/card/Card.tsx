@@ -5,7 +5,7 @@ import Rating from '../rating/Rating';
 import heart from '../../images/heart.svg';
 import heartWhite from '../../images/heartWhite.svg'
 import heartFavourite from '../../images/heart-favourite.svg';
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../../services/useTypedSelector';
 import { addFavourites, removeFavourite } from '../../store/movies/movies.slice';
 
 interface PropsCard {

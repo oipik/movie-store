@@ -1,5 +1,5 @@
 import React from 'react'
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks'
+import { useAppDispatch, useAppSelector } from '../../services/useTypedSelector'
 import { changeTheme } from '../../store/movies/movies.slice';
 
 const SwitcherTheme: React.FC = () => {
