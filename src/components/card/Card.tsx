@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { memo, useState } from 'react'
 import { IMovies } from '../../models/models-Movies';
 import { Link } from 'react-router-dom';
 import Rating from '../rating/Rating';
@@ -16,10 +16,11 @@ interface PropsCard {
 
 const Card: React.FC<PropsCard> = ({ movie, query, isFavourite = false }) => {
   const dispatch = useAppDispatch();
-  const { favourites, theme } = useAppSelector(state => state.movies);
 
-  const object = favourites.find(item => item.id === movie.id);
-  const [isFav, setIsFav] = useState(typeof object === 'object' ? true : false);
+  const theme = useAppSelector(state => state.movies.theme);
+  const favourite = useAppSelector(state => state.movies.favourites.find(item => item.id === movie.id));
+
+  const [isFav, setIsFav] = useState(typeof favourite === 'object' ? true : false);
 
   const handlerIsOrFalseFav = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -66,4 +67,4 @@ const Card: React.FC<PropsCard> = ({ movie, query, isFavourite = false }) => {
   )
 }
 
-export default Card
+export default Card;

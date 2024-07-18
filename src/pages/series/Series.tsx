@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { useGetSeriesQuery } from '../../store/movies/movies.api'
+import React, { useEffect } from 'react'
+import { useGetSeriesQuery } from '../../store/movies/movies.api';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 
 import Paginate from '../../components/paginate/Paginate';

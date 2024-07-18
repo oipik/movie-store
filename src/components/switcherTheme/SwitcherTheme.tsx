@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../services/useTypedSelector'
 import { changeTheme } from '../../store/movies/movies.slice';
 
 const SwitcherTheme: React.FC = () => {
-  const { theme } = useAppSelector(state => state.movies);
+  const theme = useAppSelector(state => state.movies.theme);
   const dispatch = useAppDispatch();
 
   const handlerChangeTheme = () => {

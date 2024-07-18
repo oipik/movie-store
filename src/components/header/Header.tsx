@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import NavItem from '../navItem/NavItem'
 import Wrapper from '../wrapper/Wrapper'
 import MobileMenu from '../mobileMenu/MobileMenu'
@@ -16,30 +16,26 @@ import searchSvg from "../../images/search.svg"
 
 const Header: React.FC = () => {
   const [isMobileMenu, setIsMobileMenu] = useState(false);
-  const [search, setSearch] = useState('');
   const navigate = useNavigate();
+  const search = useRef<HTMLInputElement>(null);
 
-  const { theme } = useAppSelector(state => state.movies);
+  const theme = useAppSelector(state => state.movies.theme);
   const dispatch = useAppDispatch();
 
   const handleSearch = () => {
-    if (search.trim()) {
-      navigate(`/search?query=${search}`);
+    if (search.current?.value.trim()) {
+      navigate(`/search?query=${search.current?.value}`);
       dispatch(changeNewPage(1));
     } else {
       navigate('/movies');
     }
   }
 
-  const logo = useMemo(() => {
-    return <Link to="/" className='text-[#535353] hover:text-default font-bold text-3xl dark:text-[#FBFDFC]'>Movie-store</Link>
-  }, [])
-
   return (
     <Wrapper>
       <div className='flex items-center justify-between'>
         <div className='w-full flex items-center justify-between ll:justify-start'>
-          {logo}
+          <Link to="/" className='text-[#535353] hover:text-default font-bold text-3xl dark:text-[#FBFDFC]'>Movie-store</Link>
           <nav className='ml-8 hidden ll:block'>
             <ul className="flex space-x-7 items-center">
               <NavItem text="Фильмы" link="/movies" />
@@ -58,8 +54,7 @@ const Header: React.FC = () => {
           <div className='flex items-center'>
             <SwitcherTheme />
             <input
-              value={search}
-              onChange={e => setSearch(e.target.value)}
+              ref={search}
               className='h-[50px] w-[300px] bg-[#E4E4E4] dark:bg-[#1B1E25] dark:text-white rounded font-semibold text-lg text-[#535353] px-4 focus:outline-none'
               type="text"
               placeholder='Search'
