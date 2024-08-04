@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { memo, useRef, useState } from 'react'
 import NavItem from '../navItem/NavItem'
 import Wrapper from '../wrapper/Wrapper'
 import MobileMenu from '../mobileMenu/MobileMenu'
@@ -49,6 +49,12 @@ const Header: React.FC = () => {
           </div>
           <MobileMenu isOpen={isMobileMenu} setIsMobileMenu={setIsMobileMenu} />
         </div>
+        <Link to="auth/login">
+          <Button text="Вход" />
+        </Link>
+        <Link to="auth/register">
+          <Button text="Регистрация" />
+        </Link>
         <div className='hidden ll:block'>
           <div className='flex items-center'>
             <input
@@ -72,5 +78,18 @@ const Header: React.FC = () => {
     </Wrapper>
   )
 }
+
+interface IButtonProps {
+  text: string;
+}
+
+const Button: React.FC<IButtonProps> = memo(({ text }) => {
+  return (
+    <button
+      className='mr-[10px] h-[50px] p-[20px] text-default border rounded-lg border-default flex items-center text text-lg font-bold hover:text-white hover:bg-default'>
+      {text}
+    </button>
+  )
+})
 
 export default Header

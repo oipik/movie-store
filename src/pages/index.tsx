@@ -9,6 +9,8 @@ import Movie from "./movie/Movie";
 import Page404 from "./page404/Page404";
 import Layout from "./layout/Layout";
 import SearchResult from "./searchResult/SearchResult";
+import Login from "./login/Login";
+import Register from "./register/Register";
 
 function Pages(): JSX.Element {
   return (
@@ -20,6 +22,8 @@ function Pages(): JSX.Element {
         <Route path="cartoons" element={<Cartoons />} />
         <Route path="favourites" element={<Favourites />} />
         <Route path="search" element={<SearchResult />} />
+        <Route path="auth/login" element={<Login />} />
+        <Route path="auth/register" element={<Register />} />
         <Route path=":movie/:id" element={<Movie />} />
         <Route path="*" element={<Page404 />} />
       </Route>
