@@ -6,7 +6,6 @@ import MobileMenu from '../mobileMenu/MobileMenu'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../services/useTypedSelector'
 import { changeNewPage } from '../../store/movies/movies.slice'
-import SwitcherTheme from '../switcherTheme/SwitcherTheme'
 
 import mobileMenuIcon from '../../images/icon-menu.svg'
 import mobileMenuIconWhite from "../../images/icon-menu-white.svg"
@@ -52,7 +51,6 @@ const Header: React.FC = () => {
         </div>
         <div className='hidden ll:block'>
           <div className='flex items-center'>
-            <SwitcherTheme />
             <input
               ref={search}
               className='h-[50px] w-[300px] bg-[#E4E4E4] dark:bg-[#1B1E25] dark:text-white rounded font-semibold text-lg text-[#535353] px-4 focus:outline-none'

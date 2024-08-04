@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react'
+import React, { useState } from 'react'
 import { IMovies } from '../../models/models-Movies';
 import { Link } from 'react-router-dom';
 import Rating from '../rating/Rating';

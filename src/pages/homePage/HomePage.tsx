@@ -2,6 +2,7 @@ import React from 'react';
 import { useGetMovieRandomQuery } from '../../store/movies/movies.api';
 
 import star from '../../images/star.png'
+import SwitcherTheme from '../../components/switcherTheme/SwitcherTheme';
 
 const HomePage: React.FC = () => {
 
@@ -14,7 +15,7 @@ const HomePage: React.FC = () => {
       {isError && <p className='text-center text-4xl dark:text-white'>Ошибка доступа...</p>}
       {isLoading && <p className='text-center text-4xl dark:text-white'>Loading...</p>}
       {poster && poster !== undefined &&
-        <section className='m:flex m:justify-between px-5 mt-[70px]'>
+        <section className='m:flex m:justify-between px-5 mt-[70px] relative'>
           <img className='w-[300px] h-[400px] m-auto mb-[10px]' src={poster.poster.url} alt="poster" />
           <div className='ml-[40px]'>
             <h2 className='text-2xl font-bold dark:text-white mb-[20px]'>{poster.name}, {poster.alternativeName}</h2>
@@ -30,6 +31,9 @@ const HomePage: React.FC = () => {
                 </a>
               ))}
             </div>
+          </div>
+          <div className='absolute bottom-16 left-[-130px]'>
+            <SwitcherTheme />
           </div>
         </section>
       }
