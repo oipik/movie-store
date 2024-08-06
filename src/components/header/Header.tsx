@@ -32,8 +32,8 @@ const Header: React.FC = () => {
 
   return (
     <Wrapper>
-      <div className='flex items-center justify-between'>
-        <div className='w-full flex items-center justify-between ll:justify-start'>
+      <div className='flex items-center justify-between w-full'>
+        <div className='flex items-center justify-between w-full ll:w-auto'>
           <Link to="/" className='text-[#535353] hover:text-default font-bold text-3xl dark:text-[#FBFDFC]'>Movie-store</Link>
           <nav className='ml-8 hidden ll:block'>
             <ul className="flex space-x-7 items-center">
@@ -49,29 +49,33 @@ const Header: React.FC = () => {
           </div>
           <MobileMenu isOpen={isMobileMenu} setIsMobileMenu={setIsMobileMenu} />
         </div>
-        <Link to="auth/login">
-          <Button text="Вход" />
-        </Link>
-        <Link to="auth/register">
-          <Button text="Регистрация" />
-        </Link>
-        <div className='hidden ll:block'>
-          <div className='flex items-center'>
-            <input
-              ref={search}
-              className='h-[50px] w-[300px] bg-[#E4E4E4] dark:bg-[#1B1E25] dark:text-white rounded font-semibold text-lg text-[#535353] px-4 focus:outline-none'
-              type="text"
-              placeholder='Search'
-            />
-            <button
-              onClick={handleSearch}
-              className='h-[50px] w-[50px] bg-[#F4ED48] rounded flex justify-center items-center cursor-pointer'
-            >
-              <img
-                className='h-[25px] w-[25px]'
-                src={searchSvg}
-                alt="search" />
-            </button>
+        <div className='flex items-center justify-between'>
+          <div className='hidden ll:flex gap-[10px] m-[10px]'>
+            <Link to="auth/login">
+              <Button text="Вход" />
+            </Link>
+            <Link to="auth/register">
+              <Button text="Регистрация" />
+            </Link>
+          </div>
+          <div className='hidden ll:flex ll:items-center ll:w-auto'>
+            <div className='flex items-center w-full'>
+              <input
+                ref={search}
+                className='h-[50px] w-full max-w-[300px] bg-[#E4E4E4] dark:bg-[#1B1E25] dark:text-white rounded font-semibold text-lg text-[#535353] px-4 focus:outline-none'
+                type="text"
+                placeholder='Search'
+              />
+              <button
+                onClick={handleSearch}
+                className='h-[50px] w-[50px] bg-[#F4ED48] rounded flex justify-center items-center cursor-pointer'
+              >
+                <img
+                  className='h-[25px] w-[25px]'
+                  src={searchSvg}
+                  alt="search" />
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -83,10 +87,10 @@ interface IButtonProps {
   text: string;
 }
 
-const Button: React.FC<IButtonProps> = memo(({ text }) => {
+export const Button: React.FC<IButtonProps> = memo(({ text }) => {
   return (
     <button
-      className='mr-[10px] h-[50px] p-[20px] text-default border rounded-lg border-default flex items-center text text-lg font-bold hover:text-white hover:bg-default'>
+      className='h-[50px] p-[20px] text-default border rounded-lg border-default flex items-center text text-lg font-bold hover:text-white hover:bg-default'>
       {text}
     </button>
   )
