@@ -9,8 +9,8 @@ interface IPaginateProps {
 const Paginate: React.FC<IPaginateProps> = ({ initialPage, pageCount, handlePageClick }) => {
   return (
     <ReactPaginate
-      previousLabel={"Previous"}
-      nextLabel={"Next"}
+      previousLabel={<div className="mb-7 s:mb-0">Previous</div>}
+      nextLabel={<div className="mb-7 s:mb-0">Next</div>}
       pageRangeDisplayed={3}
       marginPagesDisplayed={1}
       forcePage={initialPage}
