@@ -1,15 +1,26 @@
-import { useForm } from "react-hook-form"
-
-interface IFormData {
-  email: string;
-  password: string;
-}
+import { useForm } from "react-hook-form";
+import { fetchAuthLogin } from "../../store/movies/auth.slice";
+import { useAppDispatch, useAppSelector } from "../../services/useTypedSelector";
+import { UserLogin } from "../../models/models-Users";
+import { Navigate } from "react-router-dom";
 
 const Login: React.FC = () => {
-  const { register, handleSubmit, formState: { errors, isValid } } = useForm<IFormData>({ mode: "onChange" });
+  const isAuth = Boolean(useAppSelector(state => state.auth.data));
+  const dispatch = useAppDispatch();
+  const { register, handleSubmit, formState: { errors, isValid } } = useForm<UserLogin>({ mode: "onChange" });
 
-  const onSubmit = (data: IFormData) => {
-    console.log(data);
+  const onSubmit = async (value: UserLogin) => {
+    const data = await dispatch(fetchAuthLogin(value));
+    if (!data.payload) {
+      return alert('Не удалось авторизоваться!');
+    }
+    if ('token' in data.payload) {
+      window.localStorage.setItem('token', data.payload.token);
+    }
+  }
+
+  if (isAuth) {
+    return <Navigate to="/" />
   }
 
   return (

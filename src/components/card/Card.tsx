@@ -19,6 +19,7 @@ const Card: React.FC<PropsCard> = ({ movie, query, isFavourite = false }) => {
 
   const theme = useAppSelector(state => state.movies.theme);
   const favourite = useAppSelector(state => state.movies.favourites.find(item => item.id === movie.id));
+  const isAuth = Boolean(useAppSelector(state => state.auth.data));
 
   const [isFav, setIsFav] = useState(typeof favourite === 'object' ? true : false);
 
@@ -56,12 +57,15 @@ const Card: React.FC<PropsCard> = ({ movie, query, isFavourite = false }) => {
       <p className="mt-2 text-[#373737] font-medium text-xl dark:text-white">{movie.name.length < 21 ? movie.name : `${movie.name.slice(0, 21)}...`}</p>
       <div className='flex justify-between'>
         <p className="text-[#C3C3C3] font-medium text-lg">{movie.year}</p>
-        <button
-          className='block w-[25px] h-[25px]'
-          onClick={isFavourite ? handlerAddOrRemoveMovie : handlerIsOrFalseFav}
-        >
-          <img src={isFav ? heartFavourite : theme ? heart : heartWhite} alt="favourite" />
-        </button>
+        {
+          isAuth && <button
+            className='block w-[25px] h-[25px]'
+            onClick={isFavourite ? handlerAddOrRemoveMovie : handlerIsOrFalseFav}
+          >
+            <img src={isFav ? heartFavourite : theme ? heart : heartWhite} alt="favourite" />
+          </button>
+        }
+
       </div>
     </div >
   )

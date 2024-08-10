@@ -1,17 +1,27 @@
-import { useForm } from "react-hook-form"
-import avatar from "../../images/avatar.png"
-
-interface IFormData {
-  name: string;
-  email: string;
-  password: string;
-}
+import { useForm } from "react-hook-form";
+import { useAppDispatch, useAppSelector } from "../../services/useTypedSelector";
+import { IUserRegister } from "../../models/models-Users";
+import { fetchAuthRegister } from "../../store/movies/auth.slice";
+import { Navigate } from "react-router-dom";
+import avatar from "../../images/avatar.png";
 
 const Register: React.FC = () => {
-  const { register, handleSubmit, formState: { errors, isValid } } = useForm<IFormData>({ mode: "onChange" });
+  const isAuth = Boolean(useAppSelector(state => state.auth.data));
+  const dispatch = useAppDispatch();
+  const { register, handleSubmit, formState: { errors, isValid } } = useForm<IUserRegister>({ mode: "onChange" });
 
-  const onSubmit = (data: IFormData) => {
-    console.log(data);
+  const onSubmit = async (value: IUserRegister) => {
+    const data = await dispatch(fetchAuthRegister(value));
+    if (!data.payload) {
+      return alert('Не удалось зарегистрироваться!');
+    }
+    if ('token' in data.payload) {
+      window.localStorage.setItem('token', data.payload.token);
+    }
+  }
+
+  if (isAuth) {
+    return <Navigate to="/" />
   }
 
   return (
@@ -57,7 +67,7 @@ const Register: React.FC = () => {
           type="submit"
           className={`mt-5 text-white bg-default w-full p-[8px] ${!isValid ? 'bg-opacity-50' : null}`}
         >
-          Войти
+          Зарегистрироваться
         </button>
       </form>
     </section>

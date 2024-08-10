@@ -12,12 +12,14 @@ import mobileMenuIconWhite from "../../images/icon-menu-white.svg"
 import closeMenu from '../../images/icon-close-menu.svg'
 import closeMenuWhite from '../../images/icon-close-menu-white.svg'
 import searchSvg from "../../images/search.svg"
+import { logout } from '../../store/movies/auth.slice'
 
 const Header: React.FC = () => {
   const [isMobileMenu, setIsMobileMenu] = useState(false);
   const navigate = useNavigate();
   const search = useRef<HTMLInputElement>(null);
 
+  const isAuth = Boolean(useAppSelector(state => state.auth.data));
   const theme = useAppSelector(state => state.movies.theme);
   const dispatch = useAppDispatch();
 
@@ -27,6 +29,13 @@ const Header: React.FC = () => {
       dispatch(changeNewPage(1));
     } else {
       navigate('/movies');
+    }
+  }
+
+  const onClickLogout = () => {
+    if (window.confirm('Вы действительно хотите выйти?')) {
+      dispatch(logout());
+      window.localStorage.removeItem('token');
     }
   }
 
@@ -51,12 +60,23 @@ const Header: React.FC = () => {
         </div>
         <div className='flex items-center justify-between'>
           <div className='hidden ll:flex gap-[10px] m-[10px]'>
-            <Link to="auth/login">
-              <Button text="Вход" />
-            </Link>
-            <Link to="auth/register">
-              <Button text="Регистрация" />
-            </Link>
+            {
+              isAuth ?
+                <>
+                  <Link to="auth/login">
+                    <Button onClickLogout={onClickLogout} text="Выход" isAuth />
+                  </Link>
+                </>
+                :
+                <>
+                  <Link to="auth/login">
+                    <Button text="Вход" />
+                  </Link>
+                  <Link to="auth/register">
+                    <Button text="Регистрация" />
+                  </Link>
+                </>
+            }
           </div>
           <div className='hidden ll:flex ll:items-center ll:w-auto'>
             <div className='flex items-center w-full'>
@@ -85,15 +105,18 @@ const Header: React.FC = () => {
 
 interface IButtonProps {
   text: string;
+  isAuth?: boolean;
+  onClickLogout?: () => void;
 }
 
-export const Button: React.FC<IButtonProps> = memo(({ text }) => {
+export const Button: React.FC<IButtonProps> = memo(({ text, isAuth, onClickLogout }) => {
   return (
     <button
-      className='h-[50px] p-[20px] text-default border rounded-lg border-default flex items-center text text-lg font-bold hover:text-white hover:bg-default'>
+      onClick={onClickLogout}
+      className={`h-[50px] p-[20px] text-default border rounded-lg border-default flex items-center text text-lg font-bold hover:text-white hover:bg-default ${isAuth && 'bg-red-600 text-white border-none hover:bg-red-600'}`}>
       {text}
     </button>
   )
 })
 
-export default Header
+export default Header;
