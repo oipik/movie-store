@@ -1,6 +1,6 @@
 # О проекте
 
-Проект написан на React JS на шаблоне Create React App, TypeScript, RTK Query, Tailwind.
+Проект написан на React JS на шаблоне Create React App, React Router, TypeScript, RTK Query, Tailwind.
 
 ## Запуск проекта
 
