@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import NavItem from '../navItem/NavItem'
 import SwitcherTheme from '../switcherTheme/SwitcherTheme';
 import searchSvg from '../../images/search.svg'
+import closeMenu from '../../images/icon-close-menu.svg'
+import closeMenuWhite from '../../images/icon-close-menu-white.svg'
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../services/useTypedSelector';
 import { changeNewPage } from '../../store/movies/movies.slice';
@@ -19,6 +21,7 @@ const MobileMenu: React.FC<IMobileMenu> = ({ isOpen, setIsMobileMenu }) => {
   const navigate = useNavigate();
 
   const dispatch = useAppDispatch();
+  const theme = useAppSelector(state => state.movies.theme);
 
   const handleSearch = () => {
     if (search.trim()) {
@@ -41,8 +44,11 @@ const MobileMenu: React.FC<IMobileMenu> = ({ isOpen, setIsMobileMenu }) => {
         className={`fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-10 transition-transform transform ${isOpen ? 'flex' : 'hidden'} block ll:hidden`}
         onClick={() => setIsMobileMenu(!isOpen)}
       />
-      <div className={`fixed right-0 top-0 w-1/2 bg-white z-20 justify-center min-h-[150vh] ${isOpen ? 'flex' : 'hidden'} dark:bg-[#0B0C0E] block ll:hidden`} >
-        <nav className="my-20 mx-5 space-y-5 text-lg w-full">
+      <div className={`transition-all duration-1000 fixed right-0 top-0 w-[55%] bg-white z-20 justify-center min-h-[150vh] ${isOpen ? 'translate-x-0' : 'translate-x-full'} dark:bg-[#0B0C0E] block ll:hidden`} >
+        <div className='flex justify-end mt-[25px] mr-4'>
+          <img onClick={() => setIsMobileMenu(!isOpen)} className='w-[25px] h-[25px] cursor-pointer' src={theme ? closeMenu : closeMenuWhite} alt="menu" />
+        </div>
+        <nav className=" my-8 mx-5 space-y-5 text-lg w-full">
           <div className='flex flex-wrap ml-[10px] gap-[10px]'>
             {
               isAuth ?

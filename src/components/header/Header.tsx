@@ -9,8 +9,6 @@ import { changeNewPage } from '../../store/movies/movies.slice'
 
 import mobileMenuIcon from '../../images/icon-menu.svg'
 import mobileMenuIconWhite from "../../images/icon-menu-white.svg"
-import closeMenu from '../../images/icon-close-menu.svg'
-import closeMenuWhite from '../../images/icon-close-menu-white.svg'
 import searchSvg from "../../images/search.svg"
 import { logout } from '../../store/movies/auth.slice'
 
@@ -52,9 +50,8 @@ const Header: React.FC = () => {
               <NavItem text="Избранное" link="/favourites" />
             </ul>
           </nav>
-          <div onClick={() => setIsMobileMenu(!isMobileMenu)} className="block ll:hidden cursor-pointer z-30">
-            {isMobileMenu ? <img src={theme ? closeMenu : closeMenuWhite} alt="menu" />
-              : <img src={theme ? mobileMenuIcon : mobileMenuIconWhite} alt="menu" />}
+          <div onClick={() => setIsMobileMenu(!isMobileMenu)} className="block ll:hidden cursor-pointer">
+            <img src={theme ? mobileMenuIcon : mobileMenuIconWhite} alt="menu" />
           </div>
           <MobileMenu isOpen={isMobileMenu} setIsMobileMenu={setIsMobileMenu} />
         </div>
