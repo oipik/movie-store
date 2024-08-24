@@ -1,6 +1,5 @@
-
 interface PropsType {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 const Wrapper: React.FC<PropsType> = ({ children }) => {
@@ -8,7 +7,7 @@ const Wrapper: React.FC<PropsType> = ({ children }) => {
     <section className="l:container w-full mx-auto py-6 px-4 ">
       {children}
     </section>
-  )
-}
+  );
+};
 
-export default Wrapper
+export default Wrapper;

@@ -1,37 +1,42 @@
 import { useForm } from "react-hook-form";
-import { useAppDispatch, useAppSelector } from "../../services/useTypedSelector";
+import {
+  useAppDispatch,
+  useAppSelector,
+} from "../../services/useTypedSelector";
 import { IUserRegister } from "../../models/models-Users";
 import { fetchAuthRegister } from "../../store/movies/auth.slice";
 import { Navigate } from "react-router-dom";
 import avatar from "../../images/avatar.png";
 
 const Register: React.FC = () => {
-  const isAuth = Boolean(useAppSelector(state => state.auth.data));
+  const isAuth = Boolean(useAppSelector((state) => state.auth.data));
   const dispatch = useAppDispatch();
-  const { register, handleSubmit, formState: { errors, isValid } } = useForm<IUserRegister>({ mode: "onChange" });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = useForm<IUserRegister>({ mode: "onChange" });
 
   const onSubmit = async (value: IUserRegister) => {
     const data = await dispatch(fetchAuthRegister(value));
     if (!data.payload) {
-      return alert('Не удалось зарегистрироваться!');
+      return alert("Не удалось зарегистрироваться!");
     }
-    if ('token' in data.payload) {
-      window.localStorage.setItem('token', data.payload.token);
+    if ("token" in data.payload) {
+      window.localStorage.setItem("token", data.payload.token);
     }
-  }
+  };
 
   if (isAuth) {
-    return <Navigate to="/" />
+    return <Navigate to="/" />;
   }
 
   return (
     <section className="bg-white max-w-[400px] mx-auto p-[50px] rounded-xl">
-      <h1 className="text-center text-2xl font-bold text-gray-800 mb-3">Создание аккаунта</h1>
-      <img
-        className="w-[120] h-[120px] mx-auto"
-        src={avatar}
-        alt="avatar"
-      />
+      <h1 className="text-center text-2xl font-bold text-gray-800 mb-3">
+        Создание аккаунта
+      </h1>
+      <img className="w-[120] h-[120px] mx-auto" src={avatar} alt="avatar" />
       <form onSubmit={handleSubmit(onSubmit)}>
         <input
           className="w-full p-[15px] border border:#CACACA"
@@ -39,7 +44,10 @@ const Register: React.FC = () => {
           placeholder="Name"
           {...register("name", {
             required: "Укажите имя",
-            minLength: { value: 3, message: "Имя должно быть не меньше 3 символов" }
+            minLength: {
+              value: 3,
+              message: "Имя должно быть не меньше 3 символов",
+            },
           })}
         />
         <div className="text-red-600">{errors.name?.message}</div>
@@ -58,20 +66,25 @@ const Register: React.FC = () => {
           placeholder="Password"
           {...register("password", {
             required: "Укажите пароль",
-            minLength: { value: 6, message: "Пароль должен быть не менее 6 символов" }
+            minLength: {
+              value: 6,
+              message: "Пароль должен быть не менее 6 символов",
+            },
           })}
         />
         <div className="text-red-600">{errors.password?.message}</div>
         <button
           disabled={!isValid}
           type="submit"
-          className={`mt-5 text-white bg-default w-full p-[8px] ${!isValid ? 'bg-opacity-50' : null}`}
+          className={`mt-5 text-white bg-default w-full p-[8px] ${
+            !isValid ? "bg-opacity-50" : null
+          }`}
         >
           Зарегистрироваться
         </button>
       </form>
     </section>
-  )
-}
+  );
+};
 
 export default Register;

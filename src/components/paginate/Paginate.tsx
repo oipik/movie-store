@@ -1,12 +1,16 @@
 import ReactPaginate from "react-paginate";
 
 interface IPaginateProps {
-  initialPage: number,
-  pageCount: number,
-  handlePageClick: ({ selected }: { selected: number }) => void
+  initialPage: number;
+  pageCount: number;
+  handlePageClick: ({ selected }: { selected: number }) => void;
 }
 
-const Paginate: React.FC<IPaginateProps> = ({ initialPage, pageCount, handlePageClick }) => {
+const Paginate: React.FC<IPaginateProps> = ({
+  initialPage,
+  pageCount,
+  handlePageClick,
+}) => {
   return (
     <ReactPaginate
       previousLabel={<div className="mb-7 s:mb-0">Previous</div>}
@@ -19,12 +23,12 @@ const Paginate: React.FC<IPaginateProps> = ({ initialPage, pageCount, handlePage
       containerClassName="flex flex-wrap items-center justify-center mt-10 mb-[50px] space-x-4 text-xl "
       pageClassName="mb-7 s:mb-0 border border-solid border-lightGray rounded-3xl hover:bg-default hover:text-white dark:bg-white"
       pageLinkClassName="cursor-pointer block w-12 h-12 flex items-center justify-center "
-      activeClassName='bg-default text-white dark:bg-default dark:text-black'
+      activeClassName="bg-default text-white dark:bg-default dark:text-black"
       previousClassName="dark:text-white hover:text-default"
       nextClassName="dark:text-white hover:text-default"
       breakClassName="dark:text-white hover:text-default"
     />
-  )
-}
+  );
+};
 
-export default Paginate
+export default Paginate;

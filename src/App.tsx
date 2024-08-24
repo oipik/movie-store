@@ -2,9 +2,7 @@ import React from "react";
 import Pages from "./pages";
 
 const App: React.FC = () => {
-  return (
-    <Pages />
-  );
-}
+  return <Pages />;
+};
 
 export default App;

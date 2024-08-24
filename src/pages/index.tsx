@@ -4,7 +4,7 @@ import HomePage from "./homePage/HomePage";
 import Movies from "./movies/Movies";
 import Series from "./series/Series";
 import Cartoons from "./cartoons/Cartoons";
-import Favourites from './favourites/Favourites'
+import Favourites from "./favourites/Favourites";
 import Movie from "./movie/Movie";
 import Page404 from "./page404/Page404";
 import Layout from "./layout/Layout";
@@ -14,7 +14,7 @@ import Register from "./register/Register";
 
 function Pages(): JSX.Element {
   return (
-    <Routes >
+    <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<HomePage />} />
         <Route path="movies" element={<Movies />} />

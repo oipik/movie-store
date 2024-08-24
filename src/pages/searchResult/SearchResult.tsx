@@ -1,52 +1,79 @@
-import React from 'react';
-import { useSearchParams } from 'react-router-dom';
-import { useGetMoviesByQuery } from '../../store/movies/movies.api';
+import React from "react";
+import { useSearchParams } from "react-router-dom";
+import { useGetMoviesByQuery } from "../../store/movies/movies.api";
 
-import Card from '../../components/card/Card';
-import Paginate from '../../components/paginate/Paginate';
-import { useAppDispatch, useAppSelector } from '../../services/useTypedSelector';
-import { changeNewPage } from '../../store/movies/movies.slice';
-import SwitcherTheme from '../../components/switcherTheme/SwitcherTheme';
+import Card from "../../components/card/Card";
+import Paginate from "../../components/paginate/Paginate";
+import {
+  useAppDispatch,
+  useAppSelector,
+} from "../../services/useTypedSelector";
+import { changeNewPage } from "../../store/movies/movies.slice";
+import SwitcherTheme from "../../components/switcherTheme/SwitcherTheme";
 
 const SearchResult: React.FC = () => {
   const [searchParams] = useSearchParams();
-  const query = searchParams.get('query') || '';
+  const query = searchParams.get("query") || "";
 
-  const { newPage } = useAppSelector(state => state.movies);
+  const { newPage } = useAppSelector((state) => state.movies);
   const dispatch = useAppDispatch();
 
-  const { docs: data = [], page, pageCount = 0, isLoading, isError, isFetching } = useGetMoviesByQuery({ query, newPage }, {
-    selectFromResult: ({ data, isLoading, isError, isFetching }) => ({
-      docs: data?.docs,
-      limit: data?.limit,
-      page: data?.page,
-      pageCount: data?.pages,
-      isLoading, isError, isFetching
-    })
-  });
+  const {
+    docs: data = [],
+    page,
+    pageCount = 0,
+    isLoading,
+    isError,
+    isFetching,
+  } = useGetMoviesByQuery(
+    { query, newPage },
+    {
+      selectFromResult: ({ data, isLoading, isError, isFetching }) => ({
+        docs: data?.docs,
+        limit: data?.limit,
+        page: data?.page,
+        pageCount: data?.pages,
+        isLoading,
+        isError,
+        isFetching,
+      }),
+    }
+  );
 
   const handlePageClick = ({ selected }: { selected: number }) => {
     dispatch(changeNewPage(selected + 1));
   };
 
   const movies = data?.map((movie, i) => {
-    return <Card query={`/movies/${movie.id}`} key={i} movie={movie} />
-  })
+    return <Card query={`/movies/${movie.id}`} key={i} movie={movie} />;
+  });
 
   return (
     <>
-      <div className='flex flex-wrap justify-center gap-[40px] relative'>
-        {isError && <p className='text-4xl dark:text-white'>Ошибка доступа...</p>}
-        {isLoading || isFetching ? <p className='text-4xl dark:text-white'>Loading...</p> : movies}
-        <div className='absolute bottom-48 left-[-130px]'>
+      <div className="flex flex-wrap justify-center gap-[40px] relative">
+        {isError && (
+          <p className="text-4xl dark:text-white">Ошибка доступа...</p>
+        )}
+        {isLoading || isFetching ? (
+          <p className="text-4xl dark:text-white">Loading...</p>
+        ) : (
+          movies
+        )}
+        <div className="absolute bottom-48 left-[-130px]">
           <SwitcherTheme />
         </div>
       </div>
       <div>
-        {(movies?.length !== 0 && !isFetching) ? <Paginate initialPage={page! - 1} pageCount={pageCount} handlePageClick={handlePageClick} /> : null}
+        {movies?.length !== 0 && !isFetching ? (
+          <Paginate
+            initialPage={page! - 1}
+            pageCount={pageCount}
+            handlePageClick={handlePageClick}
+          />
+        ) : null}
       </div>
     </>
-  )
+  );
 };
 
-export default SearchResult
+export default SearchResult;

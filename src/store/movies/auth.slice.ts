@@ -88,7 +88,7 @@ const authSlice = createSlice({
         state.status = "error";
         state.data = null;
       })
-      .addDefaultCase(() => { });
+      .addDefaultCase(() => {});
   },
 });
 
