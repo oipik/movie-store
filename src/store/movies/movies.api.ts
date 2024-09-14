@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { IResponseMovies } from "../../models/models-Movies";
 import { IResponseMovie } from "../../models/models-Movie";
+import { getRandom } from "../../services/getRandom";
 
 const API_KEY = "9KAR067-Q14MT1Q-K8BN9QR-B80H7FW";
 
@@ -56,6 +57,17 @@ export const moviesApi = createApi({
       }),
       keepUnusedDataFor: 0,
     }),
+    getSimilarMovies: builder.query<IResponseMovies, void>({
+      query: () => ({
+        url: `movie?page=${getRandom(
+          1,
+          265
+        )}&limit=6&selectFields=&notNullFields=name&notNullFields=year&notNullFields=rating.kp&notNullFields=poster.url&year=2015-2024&rating.kp=7-10&type=movie`,
+        method: "GET",
+        headers: { accept: "application/json", "X-API-KEY": API_KEY },
+      }),
+      keepUnusedDataFor: 0,
+    }),
   }),
 });
 
@@ -66,4 +78,5 @@ export const {
   useGetCartoonsQuery,
   useGetMoviesByQuery,
   useGetMovieRandomQuery,
+  useGetSimilarMoviesQuery,
 } = moviesApi;

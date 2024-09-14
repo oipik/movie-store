@@ -1,12 +1,18 @@
-import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useGetMovieQuery } from "../../store/movies/movies.api";
-import SwitcherTheme from "../../components/switcherTheme/SwitcherTheme";
+import SimilarMovies from "../../components/similarMovies/SimilarMovies";
 
 const Movie: React.FC = () => {
-  const { id } = useParams();
+  const { id = "" } = useParams();
+
+  return <MovieContent key={id} id={id} />;
+};
+
+export default Movie;
+
+const MovieContent: React.FC<{ id: string }> = ({ id }) => {
   const navigate = useNavigate();
-  const { data: movie, isLoading, isError } = useGetMovieQuery(id!);
+  const { data: movie, isLoading, isError } = useGetMovieQuery(id);
 
   const name = movie?.name ? movie.name : "Название отсутствует";
   const img = movie?.poster?.url ? movie.poster.url : "Изображение отсутствует";
@@ -36,12 +42,12 @@ const Movie: React.FC = () => {
           Ошибка доступа...
         </p>
       )}
-      {isLoading ? (
-        <p className="text-center text-4xl dark:text-white">Loading...</p>
-      ) : (
-        movie &&
-        movie !== undefined && (
-          <section className="mx-[40px] mb-[20px] relative">
+
+      <section className="mx-[40px] mb-[20px] relative">
+        {isLoading ? (
+          <p className="text-center text-4xl dark:text-white">Loading...</p>
+        ) : (
+          movie !== undefined && (
             <div>
               <button
                 onClick={() => navigate(-1)}
@@ -49,7 +55,7 @@ const Movie: React.FC = () => {
               >
                 НАЗАД
               </button>
-              <div className="flex flex-wrap m:flex-nowrap">
+              <div className="flex flex-wrap m:flex-nowrap mb-[20px]">
                 <img
                   className="w-[300px] h-[400px] m:mr-[50px] mb-[15px] mx-auto ml-0"
                   src={img}
@@ -59,9 +65,6 @@ const Movie: React.FC = () => {
                   <h1 className="text-3xl font-bold text-neutral-700 mb-[10px] dark:text-white">
                     {name}
                   </h1>
-                  <p className="text-xl mb-[15px] dark:text-white">
-                    {description}
-                  </p>
                   <p className="text-lg dark:text-white">
                     <span className="font-bold">Год выхода: </span>
                     {year}
@@ -86,6 +89,9 @@ const Movie: React.FC = () => {
                     )}
                     {imdb !== null && <div>IMDB {imdb}</div>}
                   </div>
+                  <p className="text-xl mb-[15px] dark:text-white">
+                    {description}
+                  </p>
                   {watch?.map((item, i) => (
                     <a
                       href={item.url}
@@ -99,15 +105,11 @@ const Movie: React.FC = () => {
                   ))}
                 </div>
               </div>
+              <SimilarMovies />
             </div>
-            <div className="absolute bottom-16 left-[-130px]">
-              <SwitcherTheme />
-            </div>
-          </section>
-        )
-      )}
+          )
+        )}
+      </section>
     </>
   );
 };
-
-export default Movie;
