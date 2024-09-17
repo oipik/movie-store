@@ -1,4 +1,4 @@
-import React, { memo, useRef, useState } from "react";
+import { memo, useRef, useState } from "react";
 import NavItem from "../navItem/NavItem";
 import Wrapper from "../wrapper/Wrapper";
 import MobileMenu from "../mobileMenu/MobileMenu";

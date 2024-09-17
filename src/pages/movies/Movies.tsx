@@ -1,10 +1,8 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useGetMoviesQuery } from "../../store/movies/movies.api";
 import { useSearchParams, useNavigate } from "react-router-dom";
 
-import Paginate from "../../components/paginate/Paginate";
-import Card from "../../components/card/Card";
-import SwitcherTheme from "../../components/switcherTheme/SwitcherTheme";
+import { Paginate, Card, SwitcherTheme } from "../../components";
 
 const Movies: React.FC = () => {
   const [searchParams] = useSearchParams();

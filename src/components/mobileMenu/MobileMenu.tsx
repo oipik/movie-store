@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import NavItem from "../navItem/NavItem";
 import SwitcherTheme from "../switcherTheme/SwitcherTheme";
 import searchSvg from "../../images/search.svg";

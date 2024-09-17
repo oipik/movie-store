@@ -1,8 +1,7 @@
-import React from "react";
 import { useGetMovieRandomQuery } from "../../store/movies/movies.api";
 
 import star from "../../images/star.png";
-import SwitcherTheme from "../../components/switcherTheme/SwitcherTheme";
+import { SwitcherTheme } from "../../components";
 
 const HomePage: React.FC = () => {
   const { data: poster, isLoading, isError } = useGetMovieRandomQuery();

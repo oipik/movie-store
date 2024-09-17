@@ -1,0 +1,10 @@
+export { default as Card } from "./card/Card";
+export { default as Footer } from "./footer/Footer";
+export { default as Header } from "./header/Header";
+export { default as MobileMenu } from "./mobileMenu/MobileMenu";
+export { default as NavItem } from "./navItem/NavItem";
+export { default as Paginate } from "./paginate/Paginate";
+export { default as Rating } from "./rating/Rating";
+export { default as SimilarMovies } from "./similarMovies/SimilarMovies";
+export { default as SwitcherTheme } from "./switcherTheme/SwitcherTheme";
+export { default as Wrapper } from "./wrapper/Wrapper";

@@ -1,15 +1,13 @@
-import React from "react";
 import { useSearchParams } from "react-router-dom";
 import { useGetMoviesByQuery } from "../../store/movies/movies.api";
 
-import Card from "../../components/card/Card";
-import Paginate from "../../components/paginate/Paginate";
+import { Card, Paginate, SwitcherTheme } from "../../components";
+
 import {
   useAppDispatch,
   useAppSelector,
 } from "../../services/useTypedSelector";
 import { changeNewPage } from "../../store/movies/movies.slice";
-import SwitcherTheme from "../../components/switcherTheme/SwitcherTheme";
 
 const SearchResult: React.FC = () => {
   const [searchParams] = useSearchParams();

@@ -1,5 +1,3 @@
-import React from "react";
-
 const Page404: React.FC = () => {
   return (
     <div className="flex flex-wrap justify-center gap-[40px]">
