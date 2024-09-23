@@ -43,7 +43,7 @@ const SearchResult: React.FC = () => {
   };
 
   const movies = data?.map((movie, i) => {
-    return <Card query={`/movies/${movie.id}`} key={i} movie={movie} />;
+    return <Card query={`/search/${movie.id}`} key={i} movie={movie} />;
   });
 
   return (

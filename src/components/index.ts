@@ -8,3 +8,4 @@ export { default as Rating } from "./rating/Rating";
 export { default as SimilarMovies } from "./similarMovies/SimilarMovies";
 export { default as SwitcherTheme } from "./switcherTheme/SwitcherTheme";
 export { default as Wrapper } from "./wrapper/Wrapper";
+export { default as Loader } from "./loader/Loader";

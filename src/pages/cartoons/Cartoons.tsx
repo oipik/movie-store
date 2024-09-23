@@ -36,7 +36,7 @@ const Cartoons: React.FC = () => {
   };
 
   const movies = data?.map((movie, i) => {
-    return <Card query={`/movies/${movie.id}`} key={i} movie={movie} />;
+    return <Card query={`/cartoons/${movie.id}`} key={i} movie={movie} />;
   });
 
   return (
