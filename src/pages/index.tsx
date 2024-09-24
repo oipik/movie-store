@@ -1,4 +1,4 @@
-import { Suspense } from "react";
+import { Suspense, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import HomePage from "./homePage/HomePage";
@@ -13,8 +13,16 @@ import { LoginAsync as Login } from "./login/LoginAsync";
 import { RegisterAsync as Register } from "./register/RegisterAsync";
 import { SearchResultAsync as SearchResult } from "./searchResult/SearchResultAsync";
 import { Loader } from "../components";
+import { useAppDispatch } from "../services/useTypedSelector";
+import { fetchAuthMe } from "../store/movies/auth.slice";
 
 function Pages(): JSX.Element {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchAuthMe());
+  }, [dispatch]);
+
   return (
     <Suspense fallback={<Loader />}>
       <Routes>
